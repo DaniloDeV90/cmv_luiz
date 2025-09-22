@@ -22,7 +22,7 @@ interface ProdutoCMV {
 }
 
 function App() {
-  const produtosSalvos = JSON.parse(localStorage.getItem("produto") || "");
+  const produtosSalvos = JSON.parse(localStorage.getItem("produto") || "[]");
   const [produto, setProduto] = useState<string>("");
   const [valorEstoqueInicial, setValorEstoqueInicial] = useState<number>(0);
   const [valorCompra, setValorCompra] = useState<number>(0);
@@ -85,7 +85,7 @@ function App() {
 
     // Obter chaves do primeiro item para aplicar estilo no cabeçalho
     const headers = Object.keys(data[0]);
-    headers.forEach((header, index) => {
+    headers.forEach((_header, index) => {
       const cellRef = XLSX.utils.encode_cell({ r: 0, c: index });
       if (!worksheet[cellRef]) return;
       worksheet[cellRef].s = headerStyle;
@@ -99,7 +99,9 @@ function App() {
     XLSX.writeFile(workbook, "resultado.xlsx"); // .xlsx, não .csv
   };
   const deleteItem = (indexRemocao: number) => {
-    const result = produtosCMV.filter((value, index) => index !== indexRemocao);
+    const result = produtosCMV.filter(
+      (_value, index) => index !== indexRemocao
+    );
 
     setProdutosCMV(result);
     localStorage.setItem("produto", JSON.stringify(result));
