@@ -459,19 +459,19 @@ function App() {
                           {p.produto || "-"}
                         </TableCell>
                         <TableCell align="right">
-                          R$ {(p.valorDeProduto || 0).toFixed(2)}
+                          {(p.valorDeProduto || 0).toFixed(2)}
                         </TableCell>
                         <TableCell align="right">
-                          R$ {(p.estoqueInicial || 0).toFixed(2)}
+                          {(p.estoqueInicial || 0).toFixed(2)}
                         </TableCell>
                         <TableCell align="right">
-                          R$ {(p.estoqueNecessario || 0).toFixed(2)}
+                          {(p.estoqueNecessario || 0).toFixed(2)}
                         </TableCell>
                         <TableCell align="right">
-                          R$ {(p.compra || 0).toFixed(2)}
+                          {(p.compra || 0).toFixed(2)}
                         </TableCell>
                         <TableCell align="right">
-                          R$ {(p.estoqueFinal || 0).toFixed(2)}
+                          {(p.estoqueFinal || 0).toFixed(2)}
                         </TableCell>
                         <TableCell
                           align="right"
