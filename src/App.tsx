@@ -239,8 +239,12 @@ function App() {
                 <TextField
                   label="Valor do Produto"
                   type="number"
-                  onChange={(e) => setValorDeProduto(Number(e.target.value))}
-                  value={ValorDeProduto}
+                  onChange={(e) =>
+                    setValorDeProduto(
+                      e.target.value === "" ? 0 : Number(e.target.value)
+                    )
+                  }
+                  value={ValorDeProduto === 0 ? "" : ValorDeProduto}
                   fullWidth
                   variant="outlined"
                 />
@@ -251,9 +255,11 @@ function App() {
                   label="Estoque Inicial"
                   type="number"
                   onChange={(e) =>
-                    setValorEstoqueInicial(Number(e.target.value))
+                    setValorEstoqueInicial(
+                      e.target.value === "" ? 0 : Number(e.target.value)
+                    )
                   }
-                  value={valorEstoqueInicial}
+                  value={valorEstoqueInicial === 0 ? "" : valorEstoqueInicial}
                   fullWidth
                   variant="outlined"
                 />
@@ -264,9 +270,13 @@ function App() {
                   label="Estoque Necessário"
                   type="number"
                   onChange={(e) =>
-                    setvalorEstoqueNecessario(Number(e.target.value))
+                    setvalorEstoqueNecessario(
+                      e.target.value === "" ? 0 : Number(e.target.value)
+                    )
                   }
-                  value={valorEstoqueNecessario}
+                  value={
+                    valorEstoqueNecessario === 0 ? "" : valorEstoqueNecessario
+                  }
                   fullWidth
                   variant="outlined"
                 />
@@ -276,8 +286,12 @@ function App() {
                 <TextField
                   label="Valor da Compra"
                   type="number"
-                  onChange={(e) => setValorCompra(Number(e.target.value))}
-                  value={valorCompra}
+                  onChange={(e) =>
+                    setValorCompra(
+                      e.target.value === "" ? 0 : Number(e.target.value)
+                    )
+                  }
+                  value={valorCompra === 0 ? "" : valorCompra}
                   fullWidth
                   variant="outlined"
                 />
@@ -287,8 +301,12 @@ function App() {
                 <TextField
                   label="Estoque Final"
                   type="number"
-                  onChange={(e) => setValorEstoqueFinal(Number(e.target.value))}
-                  value={valorEstoqueFinal}
+                  onChange={(e) =>
+                    setValorEstoqueFinal(
+                      e.target.value === "" ? 0 : Number(e.target.value)
+                    )
+                  }
+                  value={valorEstoqueFinal === 0 ? "" : valorEstoqueFinal}
                   fullWidth
                   variant="outlined"
                 />
@@ -298,8 +316,12 @@ function App() {
                 <TextField
                   label="Receita de Venda"
                   type="number"
-                  onChange={(e) => setReceitaDeVenda(Number(e.target.value))}
-                  value={receitaDeVenda}
+                  onChange={(e) =>
+                    setReceitaDeVenda(
+                      e.target.value === "" ? 0 : Number(e.target.value)
+                    )
+                  }
+                  value={receitaDeVenda === 0 ? "" : receitaDeVenda}
                   fullWidth
                   variant="outlined"
                 />
@@ -537,8 +559,12 @@ function App() {
               <TextField
                 label="Valor do Produto"
                 type="number"
-                onChange={(e) => setValorDeProduto(Number(e.target.value))}
-                value={ValorDeProduto}
+                onChange={(e) =>
+                  setValorDeProduto(
+                    e.target.value === "" ? 0 : Number(e.target.value)
+                  )
+                }
+                value={ValorDeProduto === 0 ? "" : ValorDeProduto}
                 fullWidth
                 variant="outlined"
               />
@@ -548,8 +574,12 @@ function App() {
               <TextField
                 label="Estoque Inicial"
                 type="number"
-                onChange={(e) => setValorEstoqueInicial(Number(e.target.value))}
-                value={valorEstoqueInicial}
+                onChange={(e) =>
+                  setValorEstoqueInicial(
+                    e.target.value === "" ? 0 : Number(e.target.value)
+                  )
+                }
+                value={valorEstoqueInicial === 0 ? "" : valorEstoqueInicial}
                 fullWidth
                 variant="outlined"
               />
@@ -560,9 +590,13 @@ function App() {
                 label="Estoque Necessário"
                 type="number"
                 onChange={(e) =>
-                  setvalorEstoqueNecessario(Number(e.target.value))
+                  setvalorEstoqueNecessario(
+                    e.target.value === "" ? 0 : Number(e.target.value)
+                  )
                 }
-                value={valorEstoqueNecessario}
+                value={
+                  valorEstoqueNecessario === 0 ? "" : valorEstoqueNecessario
+                }
                 fullWidth
                 variant="outlined"
               />
@@ -572,8 +606,12 @@ function App() {
               <TextField
                 label="Valor da Compra"
                 type="number"
-                onChange={(e) => setValorCompra(Number(e.target.value))}
-                value={valorCompra}
+                onChange={(e) =>
+                  setValorCompra(
+                    e.target.value === "" ? 0 : Number(e.target.value)
+                  )
+                }
+                value={valorCompra === 0 ? "" : valorCompra}
                 fullWidth
                 variant="outlined"
               />
@@ -583,8 +621,12 @@ function App() {
               <TextField
                 label="Estoque Final"
                 type="number"
-                onChange={(e) => setValorEstoqueFinal(Number(e.target.value))}
-                value={valorEstoqueFinal}
+                onChange={(e) =>
+                  setValorEstoqueFinal(
+                    e.target.value === "" ? 0 : Number(e.target.value)
+                  )
+                }
+                value={valorEstoqueFinal === 0 ? "" : valorEstoqueFinal}
                 fullWidth
                 variant="outlined"
               />
@@ -594,8 +636,12 @@ function App() {
               <TextField
                 label="Receita de Venda"
                 type="number"
-                onChange={(e) => setReceitaDeVenda(Number(e.target.value))}
-                value={receitaDeVenda}
+                onChange={(e) =>
+                  setReceitaDeVenda(
+                    e.target.value === "" ? 0 : Number(e.target.value)
+                  )
+                }
+                value={receitaDeVenda === 0 ? "" : receitaDeVenda}
                 fullWidth
                 variant="outlined"
               />
