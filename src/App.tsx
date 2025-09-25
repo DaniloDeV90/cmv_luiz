@@ -37,7 +37,7 @@ interface ProdutoCMV {
   estoqueNecessario: number;
   compra: number;
   estoqueFinal: number;
-  resultado: number;
+  cmv: number;
   porcentagem: number;
 }
 
@@ -59,9 +59,9 @@ function App() {
   );
 
   const calcularCMV = () => {
-    const resultado = valorEstoqueInicial + valorCompra - valorEstoqueFinal;
+    const cmv = valorEstoqueInicial + valorCompra - valorEstoqueFinal;
 
-    const resultadoPercentual = (resultado / receitaDeVenda) * 100;
+    const cmvPercentual = (cmv / receitaDeVenda) * 100;
     const novoProduto: ProdutoCMV = {
       produto,
       valorDeProduto: ValorDeProduto,
@@ -69,8 +69,8 @@ function App() {
       estoqueNecessario: valorEstoqueNecessario,
       compra: valorCompra,
       estoqueFinal: valorEstoqueFinal,
-      resultado,
-      porcentagem: resultadoPercentual,
+      cmv,
+      porcentagem: cmvPercentual,
     };
 
     const produtosCalculadosCMV = [...produtosCMV, novoProduto];
@@ -94,7 +94,7 @@ function App() {
       "Estoque Necessario": p.estoqueNecessario,
       "Valor da Compra": p.compra,
       "Estoque Final": p.estoqueFinal,
-      Resultado: p.resultado,
+      cmv: p.cmv,
       "Porcentagem (%)": p.porcentagem.toFixed(2),
     }));
 
@@ -127,7 +127,7 @@ function App() {
 
     const workbook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(workbook, worksheet, "CMV");
-    XLSX.writeFile(workbook, "resultado.xlsx"); // .xlsx, não .csv
+    XLSX.writeFile(workbook, "cmv.xlsx"); // .xlsx, não .csv
   };
   const deleteItem = (indexRemocao: number) => {
     const result = produtosCMV.filter(
@@ -146,15 +146,15 @@ function App() {
     setvalorEstoqueNecessario(produto.estoqueNecessario);
     setValorCompra(produto.compra);
     setValorEstoqueFinal(produto.estoqueFinal);
-    setReceitaDeVenda(produto.resultado / (produto.porcentagem / 100));
+    setReceitaDeVenda(produto.cmv / (produto.porcentagem / 100));
     setEditingIndex(index);
     setOpenEditDialog(true);
   };
 
   const salvarEdicao = () => {
     if (editingIndex !== null) {
-      const resultado = valorEstoqueInicial + valorCompra - valorEstoqueFinal;
-      const resultadoPercentual = (resultado / receitaDeVenda) * 100;
+      const cmv = valorEstoqueInicial + valorCompra - valorEstoqueFinal;
+      const cmvPercentual = (cmv / receitaDeVenda) * 100;
 
       const produtoEditado: ProdutoCMV = {
         produto,
@@ -163,8 +163,8 @@ function App() {
         estoqueNecessario: valorEstoqueNecessario,
         compra: valorCompra,
         estoqueFinal: valorEstoqueFinal,
-        resultado,
-        porcentagem: resultadoPercentual,
+        cmv,
+        porcentagem: cmvPercentual,
       };
 
       const novosProdutos = [...produtosCMV];
@@ -354,7 +354,7 @@ function App() {
           </CardContent>
         </Card>
 
-        {/* Tabela de Resultados */}
+        {/* Tabela de cmvs */}
         {produtosCMV.length > 0 && (
           <Card sx={{ boxShadow: 3 }}>
             <CardContent>
@@ -430,7 +430,7 @@ function App() {
                         align="right"
                         sx={{ fontWeight: "bold", color: "#1976d2" }}
                       >
-                        Resultado
+                        cmv
                       </TableCell>
                       <TableCell
                         align="right"
@@ -459,7 +459,7 @@ function App() {
                           {p.produto || "-"}
                         </TableCell>
                         <TableCell align="right">
-                          {(p.valorDeProduto || 0).toFixed(2)}
+                          R$ {(p.valorDeProduto || 0).toFixed(2)}
                         </TableCell>
                         <TableCell align="right">
                           {(p.estoqueInicial || 0).toFixed(2)}
@@ -478,10 +478,10 @@ function App() {
                           sx={{
                             fontWeight: "bold",
                             color:
-                              (p.resultado || 0) >= 0 ? "#2e7d32" : "#d32f2f",
+                              (p.cmv || 0) >= 0 ? "#2e7d32" : "#d32f2f",
                           }}
                         >
-                          R$ {(p.resultado || 0).toFixed(2)}
+                           {(p.cmv || 0).toFixed(2)}
                         </TableCell>
                         <TableCell
                           align="right"
