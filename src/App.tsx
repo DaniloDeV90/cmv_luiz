@@ -14,7 +14,9 @@ import * as XLSX from "xlsx";
 
 interface ProdutoCMV {
   produto: string;
+  valorDeProduto: number;
   estoqueInicial: number;
+  estoqueNecessario: number;
   compra: number;
   estoqueFinal: number;
   resultado: number;
@@ -22,9 +24,11 @@ interface ProdutoCMV {
 }
 
 function App() {
-  const produtosSalvos = JSON.parse(localStorage.getItem("produto") || "");
+  const produtosSalvos = JSON.parse(localStorage.getItem("produto") || "[]");
   const [produto, setProduto] = useState<string>("");
+  const [ValorDeProduto, setValorDeProduto] = useState<number>(0);
   const [valorEstoqueInicial, setValorEstoqueInicial] = useState<number>(0);
+  const [valorEstoqueNecessario, setvalorEstoqueNecessario] = useState<number>(0);
   const [valorCompra, setValorCompra] = useState<number>(0);
   const [valorEstoqueFinal, setValorEstoqueFinal] = useState<number>(0);
   const [receitaDeVenda, setReceitaDeVenda] = useState<number>(0);
@@ -39,7 +43,9 @@ function App() {
     const resultadoPercentual = (resultado / receitaDeVenda) * 100;
     const novoProduto: ProdutoCMV = {
       produto,
+      valorDeProduto: ValorDeProduto,
       estoqueInicial: valorEstoqueInicial,
+      estoqueNecessario: valorEstoqueNecessario,
       compra: valorCompra,
       estoqueFinal: valorEstoqueFinal,
       resultado,
@@ -51,7 +57,9 @@ function App() {
     localStorage.setItem("produto", JSON.stringify(produtosCalculadosCMV));
     // Resetar campos
     setProduto("");
+    setValorDeProduto (0)
     setValorEstoqueInicial(0);
+    setvalorEstoqueNecessario (0);
     setValorCompra(0);
     setReceitaDeVenda(0);
     setValorEstoqueFinal(0);
@@ -60,7 +68,9 @@ function App() {
   const exportarCSV = () => {
     const data = produtosCMV.map((p) => ({
       Produto: p.produto,
+      "Valor do produto": p.valorDeProduto,
       "Estoque Inicial": p.estoqueInicial,
+      "Estoque Necessario": p.estoqueNecessario,
       "Valor da Compra": p.compra,
       "Estoque Final": p.estoqueFinal,
       Resultado: p.resultado,
@@ -112,14 +122,29 @@ function App() {
         onChange={(e) => setProduto(e.target.value)}
         value={produto}
         sx={{ m: 1, width: "calc(100% - 16px)" }}
+        
       />
+
       <TextField
+        label="Valor do produto"
+        onChange={(e) => setValorDeProduto(Number(e.target.value))}
+        value={ValorDeProduto}
+        sx={{ m: 1, width: "calc(100% - 16px)" }}
+      />
+        <TextField
         label="Estoque Inicial"
         type="number"
         onChange={(e) => setValorEstoqueInicial(Number(e.target.value))}
         value={valorEstoqueInicial}
         sx={{ m: 1, width: "calc(100% - 16px)" }}
       />
+      <TextField
+        label="Estoque Inicial"
+        type="number"
+        onChange={(e) => setvalorEstoqueNecessario(Number(e.target.value))}
+        value={valorEstoqueInicial}
+        sx={{ m: 1, width: "calc(100% - 16px)" }}
+        />
       <TextField
         label="Valor da Compra"
         type="number"
@@ -151,7 +176,9 @@ function App() {
             <TableHead>
               <TableRow>
                 <TableCell>Produto</TableCell>
+                <TableCell align="right">Valor do produto</TableCell>
                 <TableCell align="right">Estoque Inicial</TableCell>
+                <TableCell align="right">Estoque Necessario</TableCell>
                 <TableCell align="right">Compra</TableCell>
                 <TableCell align="right">Estoque Final</TableCell>
                 <TableCell align="right">Resultado</TableCell>
@@ -164,12 +191,14 @@ function App() {
                 produtosCMV.map((p, index) => (
                   <TableRow key={index}>
                     <TableCell>{p.produto}</TableCell>
+                    <TableCell align="right">{p.valorDeProduto}</TableCell>
                     <TableCell align="right">{p.estoqueInicial}</TableCell>
+                    <TableCell align="right">{p.estoqueNecessario}</TableCell>
                     <TableCell align="right">{p.compra}</TableCell>
                     <TableCell align="right">{p.estoqueFinal}</TableCell>
                     <TableCell align="right">{p.resultado}</TableCell>
                     <TableCell align="right">
-                      {p.porcentagem.toFixed(2)}
+                      {p.porcentagem?.toFixed(2)}
                     </TableCell>
                     <TableCell align="right">
                       <Button onClick={() => deleteItem(index)}>Excluir</Button>
